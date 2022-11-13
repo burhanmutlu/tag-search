@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/style.css">
+  <title>Markalar</title>
+</head>
+<body>
+
+<script>
+const modal = [
+              "Saab","BMW","Atlas","BMC","Bobcat","CASE","Cummins","Daf","Deutz",
+              "Ford","Grove","Hidromek","Isuzu","Iveco","John Deere","Karsan","Kubota",
+              "Liebherr","Man","Mercedes","New Holland","Renault","Scania","Sumitomo",
+              "Tatra","Temsa","Terex","Volvo"
+            ];
+</script>
+
+<div class="tc-container">
+  <div class="tc-col-1">
+    <div class="tc-col-1-border">
+      <div>
+        <form action="">
+          <input type="text" id="tc-search" placeholder="Brand name" onkeyup="getAllTags()">
+        </form>
+      </div>
+      <div id="tc-icon-div">
+        <img id="tc-search-icon" src="assets/search.png" alt="search">
+      </div>
+    </div>
+  </div>
+  <div class="tc-col-2">
+    <span id="tc-small">BY BRAND</span> <br> <span id="tc-big">FIND EMULATOR</span>
+  </div>
+  <div class="tc-col-3">
+    
+  </div>
+</div>
+
+<script>
+
+window.onload = (event) => {
+  getAllTags();
+};
+
+function getAllTags() {
+
+  if (!document.getElementById("tc-search").value) { // boşsa çalışsın
+    document.getElementsByClassName("tc-col-3")[0].innerHTML = "";
+    for(i=0; i<modal.length; i++) {
+      link = "https://www.canbusemulator.com/en/tags/productslist/";
+      model = modal[i].toLowerCase();
+      link += model;
+      document.getElementsByClassName("tc-col-3")[0].innerHTML += '<a class="tc-a-link" href="'+ link + '">' +
+      '<div class="tc-col-3-tag">' + modal[i] + '</div></a>';
+    }
+  } else {
+    value = document.getElementById("tc-search").value;
+    document.getElementsByClassName("tc-col-3")[0].innerHTML = "";
+    for(i=0; i<modal.length; i++) {
+      temp = modal[i].toLowerCase();
+      temp2 = modal[i].toUpperCase();
+      if( temp.includes(value) || temp2.includes(value) ||  modal[i].includes(value) ) {
+        link = "https://www.canbusemulator.com/en/tags/productslist/";
+        model = modal[i].toLowerCase();
+        link += model;
+        document.getElementsByClassName("tc-col-3")[0].innerHTML += '<a class="tc-a-link" href="'+ link + '">' +
+        '<div class="tc-col-3-tag">' + modal[i] + '</div></a>';
+      }
+    }
+
+  }
+}
+
+</script>
